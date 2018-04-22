@@ -1,6 +1,6 @@
 package com.home.vk.api;
 
-import com.home.Constants;
+import com.home.util.Constants;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;

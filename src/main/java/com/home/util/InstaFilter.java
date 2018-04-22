@@ -1,4 +1,4 @@
-package com.home;
+package com.home.util;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
