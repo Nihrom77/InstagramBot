@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class InstaFilter {
 
@@ -24,11 +25,29 @@ public class InstaFilter {
             JSONArray users1 = (JSONArray) jsonObject.get("users");
 
 
-            Iterator<String> iterator = users1.iterator();
+            Iterator<Map<String, String>> iterator = users1.iterator();
             while (iterator.hasNext()) {
-                users.add(iterator.next());
+                Map<String, String> user = iterator.next();
+                String userStr = user.keySet().stream().findAny().orElse("");
+                users.add(userStr);
             }
 
+
+            /*
+               HashMap<String, String> map = new HashMap<String, String>();
+        JSONObject jObject = new JSONObject(t);
+        Iterator<?> keys = jObject.keys();
+
+        while( keys.hasNext() ){
+            String key = (String)keys.next();
+            String value = jObject.getString(key);
+            map.put(key, value);
+
+        }
+
+        System.out.println("json : "+jObject);
+        System.out.println("map : "+map);
+             */
 
         } catch (IOException | ParseException e) {
             e.printStackTrace();

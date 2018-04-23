@@ -2,7 +2,6 @@ package com.home;
 
 import com.home.commands.InstagramOperation;
 import com.home.util.Constants;
-import com.home.util.InstaStatistics;
 import org.brunocvcunha.instagram4j.Instagram4j;
 
 import java.io.IOException;
@@ -21,7 +20,6 @@ public class InstagramHandler {
         int tryCount = 8;
         int failCount = 0;
 
-        InstaStatistics stat = new InstaStatistics(0, 0);
 
         boolean isFailed = true;
         for (int i = 0; i < tryCount && isFailed; ++i) {
@@ -33,7 +31,7 @@ public class InstagramHandler {
                 if (op.getParams().getInstagram() == null) {
                     op.getParams().setInstagram(instagram);
                 }
-                stat = op.execute();
+                op.execute();
 
             } catch (SocketException e) {
                 isFailed = true;
@@ -45,10 +43,10 @@ public class InstagramHandler {
             }
         }
         System.out.println("Failed " + failCount + " times");
-        System.out.println(
-            "Today I liked " + stat.getLikedPhoto() + " photos from timeline. I'm good :)");
-        if (stat.getPostedPhoto() > 0) {
-            System.out.println("Posted photo to vk: " + stat.getPostedPhoto()
+        System.out.println("Today I liked " + op.getStatistics().getLikedPhoto()
+            + " photos from timeline. I'm good :)");
+        if (op.getStatistics().getPostedPhoto() > 0) {
+            System.out.println("Posted photo to vk: " + op.getStatistics().getPostedPhoto()
                 + ". Go to group: https://vk.com/club" + Constants.VK_GROUP_ID.substring(1));
         } else {
             System.out.println("None photo posted today.");

@@ -14,16 +14,16 @@ public class BotLauncher {
 
         InstagramHandler insta = new InstagramHandler();
 
-        boolean likeFolowing = false;
+        boolean likeFolowing = true;
         if (likeFolowing) {
             insta.likeLastPhotos(
                 new LikeFollowingOperation(new LikeFollowingParameteres(null, true, 5)));
         }
 
-        boolean likeTags = true;
+        boolean likeTags = false;
         if (likeTags) {
-            insta.likeLastPhotos(
-                new LikeTagOperation(new LikeTagParameters(Arrays.asList("библионочь"), 70, null)));
+            insta.likeLastPhotos(new LikeTagOperation(
+                new LikeTagParameters(Arrays.asList("библионочь2018"), 100, null)));
         }
     }
 

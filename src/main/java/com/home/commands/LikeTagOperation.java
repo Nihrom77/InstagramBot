@@ -14,6 +14,8 @@ import java.util.List;
 
 public class LikeTagOperation extends InstagramOperation {
 
+
+
     public LikeTagOperation(LikeTagParameters p) {
         super(p);
     }
@@ -23,13 +25,14 @@ public class LikeTagOperation extends InstagramOperation {
         return likeInstagramTag(p.getTags(), p.getMaxPost(), p.getInstagram());
     }
 
+
+
     /**
      * Лайкает посты по тегу.
      */
     public InstaStatistics likeInstagramTag(List<String> tags, int maxPost, Instagram4j instagram)
         throws IOException {
         int counter = 0;
-        int likedPhoto = 0;
 
         List<InstagramFeedResult> results = new ArrayList<>();
         for (String tag : tags) {
@@ -42,11 +45,11 @@ public class LikeTagOperation extends InstagramOperation {
                 System.out.println("Post ID: " + feedResult.getPk());
                 if (!feedResult.has_liked) {
                     instagram.sendRequest(new InstagramLikeRequest(feedResult.getPk()));
-                    likedPhoto++;
+                    getStatistics().addLikedPhoto();
                     randomWait(3000, 5500);
                 }
             }
         }
-        return new InstaStatistics(likedPhoto, 0);
+        return getStatistics();
     }
 }

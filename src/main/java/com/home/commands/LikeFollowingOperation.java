@@ -30,7 +30,6 @@ import java.util.Map;
 public class LikeFollowingOperation extends InstagramOperation {
     public List<String> likedUsers = new ArrayList<>();
 
-
     public LikeFollowingOperation(LikeFollowingParameteres p) {
         super(p);
     }
@@ -42,12 +41,11 @@ public class LikeFollowingOperation extends InstagramOperation {
         return likeInstagramFollowing(p.getInstagram(), p.getLastN(), p.isPostPhotoToVK());
     }
 
+
     private InstaStatistics likeInstagramFollowing(Instagram4j instagram, final int lastN,
         boolean postPhotoToVK) throws IOException {
 
         InstaFilter filterNames = new InstaFilter();
-        int likedPhoto = 0;
-        int postedPhoto = 0;
 
         VkApi vk = null;
         if (postPhotoToVK) {
@@ -93,10 +91,11 @@ public class LikeFollowingOperation extends InstagramOperation {
                                     "https://www.instagram.com/p/" + feedResult.code + "/?taken-by="
                                         + feedResult.getUser().getUsername();
                                 vk.postPhoto(f, url);
-                                postedPhoto++;
+                                getStatistics().addLikedPhoto();
+
                             }
                             instagram.sendRequest(new InstagramLikeRequest(feedResult.getPk()));
-                            likedPhoto++;
+                            getStatistics().addLikedPhoto();
                             randomWait(3000, 5500);
                         }
                     } else {
@@ -109,7 +108,7 @@ public class LikeFollowingOperation extends InstagramOperation {
             likedUsers.add(user.getUsername());
         }
         likedUsers.clear();
-        return new InstaStatistics(likedPhoto, postedPhoto);
+        return getStatistics();
     }
 
     public File saveImage(InstagramFeedItem feedResult, InstaFilter filter) {

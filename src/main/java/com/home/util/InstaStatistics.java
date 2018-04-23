@@ -13,6 +13,19 @@ public class InstaStatistics {
         this.postedPhoto = postedPhoto;
     }
 
+    public void addLikedPhoto() {
+        likedPhoto++;
+    }
+
+    public void addPostedPhoto() {
+        postedPhoto++;
+    }
+
+    public void resetStatistics() {
+        postedPhoto = 0;
+        likedPhoto = 0;
+    }
+
     public int getLikedPhoto() {
         return likedPhoto;
     }

@@ -9,6 +9,7 @@ import java.io.IOException;
 public abstract class InstagramOperation {
 
     private InstaParameters params;
+    private InstaStatistics statistics = new InstaStatistics(0, 0);
 
     public InstagramOperation(InstaParameters p) {
         this.params = p;
@@ -23,6 +24,10 @@ public abstract class InstagramOperation {
             e.printStackTrace();
         }
 
+    }
+
+    public InstaStatistics getStatistics() {
+        return statistics;
     }
 
     public InstaParameters getParams() {
